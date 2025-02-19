@@ -10,9 +10,7 @@ class Grid:
     def __init__(self):
         """Skapa ett objekt av klassen Grid"""
         # Spelplanen lagras i en lista av listor. Vi använder "list comprehension" för att sätta tecknet för "empty" på varje plats på spelplanen.
-        self.data = [[self.empty for y in range(self.width)] for z in range(
-            self.height)]
-
+        self.data = [[self.empty for y in range(self.width)] for z in range(self.height)]
 
     def get(self, x, y):
         """Hämta det som finns på en viss position"""
@@ -53,8 +51,19 @@ class Grid:
             self.set(j, 0, self.wall)
             self.set(j, self.height - 1, self.wall)
 
+# H. Använd for-loopar för att skapa flera, sammanhängande väggar på kartan. Se till att
+# det inte skapas några rum som man inte kan komma in i. Gör detta i filen grid.py
+        for k in range(round(self.height/2)):
+            self.set(10, k, self.wall)
+            self.set(self.width - 1, k, self.wall)
 
-    # Används i filen pickups.py
+        for m in range(round(self.width/5)):
+            self.set(m, 5, self.wall)
+            self.set(m, self.height -1, self.wall)
+
+        for p in range(round(self.height/3)):
+            self.set(self.height - 5, p+5, self.wall)
+
     def get_random_x(self):
         """Slumpa en x-position på spelplanen"""
         return random.randint(0, self.width-1)
@@ -63,8 +72,6 @@ class Grid:
         """Slumpa en y-position på spelplanen"""
         return random.randint(0, self.height-1)
 
-
     def is_empty(self, x, y):
         """Returnerar True om det inte finns något på aktuell ruta"""
         return self.get(x, y) == self.empty
-
